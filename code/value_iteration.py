@@ -25,7 +25,7 @@ class ValueIteration(object):
                 for j in range(agent.a_len):
                     value_sa = np.dot(agent.p[j,i,:],agent.r+agent.gamma*agent.value_pi)
                     value_sas.append(value_sa)
-            new_value_pi = max(value_sas)
+                new_value_pi[i] = max(value_sas)
             diff = np.sqrt(np.sum(np.square(agent.value_pi-new_value_pi)))
             if diff <1e-6:
                 break
@@ -41,7 +41,6 @@ class ValueIteration(object):
                 agent.value_q[i,j] = np.dot(agent.p[i,j],agent.r+agent.gamma*agent.value_pi)
             max_act = np.argmax(agent.value_q[i,:])
             agent.pi[i] = max_act
-
 
 
 if __name__ == '__main__':
